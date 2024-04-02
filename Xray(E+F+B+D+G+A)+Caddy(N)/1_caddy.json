@@ -173,8 +173,7 @@
           {
             "handle": [{
               "handler": "forward_proxy",
-              "auth_user_deprecated": "user", //NaiveProxy 用户，修改为自己的。
-              "auth_pass_deprecated": "pass", //NaiveProxy 密码，修改为自己的。
+              "auth_credentials": ["your_user:pass_base64"] //输入将NaiveProxy的user:pass二次base64编码后所得的字符串
               "hide_ip": true,
               "hide_via": true,
               "probe_resistance": {}
@@ -248,3 +247,7 @@
 //5）、Shadowsocks+gRPC+TLS 可随意使用 zh.xx.yy 域名与 zn.xx.yy 域名。
 //6）、NaiveProxy 仅使用 zn.xx.yy 域名（使用 HTTPS 协议）。
 //7、本示例的 SNI 分流自带限定域名连接（包括禁止以 IP 方式访问网站）。
+//8、可以使用以下命令生成 user:pass 二次 base64 编码后的字符串
+//$ echo -n "user:pass" | base64 | tr -d '\n' | base64
+//9、可以使用以下命令检验 user:pass 二次 base64 编码后的字符串是否正确
+//$ echo -e "$(echo "your_user:pass_base64" | base64 --decode | base64 --decode)"
