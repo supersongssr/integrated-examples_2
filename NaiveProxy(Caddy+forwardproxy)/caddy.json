@@ -27,8 +27,7 @@
           "routes": [{
             "handle": [{
               "handler": "forward_proxy",
-              "auth_user_deprecated": "user", //NaiveProxy 用户，修改为自己的。
-              "auth_pass_deprecated": "pass", //NaiveProxy 密码，修改为自己的。
+              "auth_credentials": ["your_user:pass_base64"], //输入将 NaiveProxy 的 user:pass 二次 base64 编码后所得的字符串
               "hide_ip": true,
               "hide_via": true,
               "probe_resistance": {}
@@ -92,4 +91,8 @@
 //2、本配置仅支持申请普通 TLS 证书，若要申请通配符 TLS 证书请参考 ‘Caddy(Other Configuration) （Caddy 的特殊应用配置方法。）’ 中对应介绍及对应配置示例。
 //3、本示例使用非 AES 算法的密码套件配置（z1.xx.yy）来避免被封。
 //4、本示例使用不同域名来实现介绍中各应用，其办法如下：
-//1）、NaiveProxy 使用 HTTPS 协议时用 z1.xx.yy 域名，使用 QUIC 协议时用 h3.xx.yy 域名。
+//NaiveProxy 使用 HTTPS 协议时用 z1.xx.yy 域名，使用 QUIC 协议时用 h3.xx.yy 域名。
+//5、可以使用以下命令生成 user:pass 二次 base64 编码后的字符串
+//$ echo -n "user:pass" | base64 | tr -d '\n' | base64
+//6、可以使用以下命令检验 user:pass 二次 base64 编码后的字符串是否正确
+//$ echo -e "$(echo "your_user:pass_base64" | base64 --decode | base64 --decode)"
